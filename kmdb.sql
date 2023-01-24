@@ -121,6 +121,7 @@ CREATE TABLE movies (
 CREATE TABLE top_cast (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     movie_id INTEGER,
+    actor_id INTEGER,
     year TEXT,
     character TEXT
 );
