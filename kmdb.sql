@@ -104,7 +104,6 @@
 
 DROP TABLE IF EXISTS movies;
 DROP TABLE IF EXISTS top_cast;
-DROP TABLE IF EXISTS studios;
 DROP TABLE IF EXISTS actors;
 
 -- Create new tables, according to your domain model
@@ -114,7 +113,8 @@ CREATE TABLE movies (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT,
     year INTEGER,
-    rating TEXT
+    rating TEXT,
+    studio TEXT
 );
 
 CREATE TABLE actors (
@@ -129,11 +129,6 @@ CREATE TABLE top_cast (
     character TEXT
 );
 
-CREATE TABLE studios (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    movie_id INTEGER,
-    studio TEXT
-);
 
 -- Insert data into your database that reflects the sample data shown above
 -- Use hard-coded foreign key IDs when necessary
@@ -142,31 +137,37 @@ CREATE TABLE studios (
 INSERT INTO movies(
     "title",
     "year",
-    "rating"
+    "rating",
+    "studio"
 ) VALUES (
     "Batman Begins",
     2005,
-    "PG-13"
+    "PG-13",
+    "Warner Bros."
 );
 
 INSERT INTO movies(
     "title",
     "year",
-    "rating"
+    "rating",
+    "studio"
 ) VALUES (
     "The Dark Knight",
     2008,
-    "PG-13"
+    "PG-13",
+    "Warner Bros."
 );
 
 INSERT INTO movies(
     "title",
     "year",
-    "rating"
+    "rating",
+    "studio"
 ) VALUES (
     "The Dark Knight Rises",
     2012,
-    "PG-13"
+    "PG-13",
+    "Warner Bros."
 );
 
 INSERT INTO actors (name)
@@ -202,12 +203,6 @@ VALUES
 (3, 10, "John Blake"),
 (3, 11, "Selina Kyle");
 
-INSERT INTO studios (studio, movie_id)
-VALUES 
-    ("Warner Bros.", 1),
-    ("Warner Bros.", 2),
-    ("Warner Bros.", 3);
-
 
 -- Prints a header for the movies output
 .print "Movies"
@@ -217,9 +212,8 @@ VALUES
 -- The SQL statement for the movies output
 -- TODO!
 
-SELECT movies.title, movies.year, movies.rating, studios.studio
-FROM movies
-INNER JOIN studios on movies_id = studios.movie_id;
+SELECT title, year, rating, studio
+FROM movies;
 
 
 -- Prints a header for the cast output
@@ -233,6 +227,5 @@ INNER JOIN studios on movies_id = studios.movie_id;
 
 SELECT movies.title, actors.name, top_cast.character
 FROM top_cast
-INNER JOIN movies ON top_cast.movie_id = movie_id
-INNER JOIN actors ON top_cast.actor_id = actor_id;
-
+INNER JOIN movies ON top_cast.movie_id = movies.id
+INNER JOIN actors ON top_cast.actor_id = actors.id;
