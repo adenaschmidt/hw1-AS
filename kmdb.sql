@@ -153,6 +153,11 @@ CREATE TABLE studios (
 -- The SQL statement for the movies output
 -- TODO!
 
+SELECT movies.title, movies.year, movings.MPAA, studios.studio
+FROM movies
+INNER JOIN studios on movies.id = studios.movie_id;
+
+
 -- Prints a header for the cast output
 .print ""
 .print "Top Cast"
@@ -162,3 +167,9 @@ CREATE TABLE studios (
 
 -- The SQL statement for the cast output
 -- TODO!
+
+SELECT movies.title, actors.name, top_cast.character
+FROM top_cast
+INNER JOIN movies 
+INNER JOIN 
+
