@@ -122,12 +122,27 @@ CREATE TABLE top_cast (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     movie_id INTEGER,
     year TEXT,
-    role TEXT
+    character TEXT
+);
+
+CREATE TABLE actors (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    character TEXT
+);
+
+CREATE TABLE studios (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    movie_id INTEGER,
+    studio TEXT
 );
 
 -- Insert data into your database that reflects the sample data shown above
 -- Use hard-coded foreign key IDs when necessary
 -- TODO!
+
+
+
 
 -- Prints a header for the movies output
 .print "Movies"
