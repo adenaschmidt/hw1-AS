@@ -113,22 +113,19 @@ DROP TABLE IF EXISTS actors;
 CREATE TABLE movies (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT,
-    year TEXT,
-    MPAA TEXT,
-    studio TEXT
+    year INTEGER,
+    rating TEXT
+);
+
+CREATE TABLE actors (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT
 );
 
 CREATE TABLE top_cast (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     movie_id INTEGER,
     actor_id INTEGER,
-    year TEXT,
-    character TEXT
-);
-
-CREATE TABLE actors (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT,
     character TEXT
 );
 
@@ -142,7 +139,74 @@ CREATE TABLE studios (
 -- Use hard-coded foreign key IDs when necessary
 -- TODO!
 
+INSERT INTO movies(
+    "title",
+    "year",
+    "rating"
+) VALUES (
+    "Batman Begins",
+    2005,
+    "PG-13"
+);
 
+INSERT INTO movies(
+    "title",
+    "year",
+    "rating"
+) VALUES (
+    "The Dark Knight",
+    2008,
+    "PG-13"
+);
+
+INSERT INTO movies(
+    "title",
+    "year",
+    "rating"
+) VALUES (
+    "The Dark Knight Rises",
+    2012,
+    "PG-13"
+);
+
+INSERT INTO actors (name)
+VALUES 
+    ("Christian Bale"),
+    ("Michael Caine"), 
+    ("Liam Neeson"),
+    ("Katie Holmes"), 
+    ("Gary Oldman"), 
+    ("Heath Ledger"), 
+    ("Aaron Eckhart"), 
+    ("Maggie Gyllenhaal"), 
+    ("Tom Hardy"), 
+    ("Joseph Gordon-Levitt"), 
+    ("Anne Hathaway");
+
+
+INSERT INTO top_cast(movie_id, actor_id, character)
+VALUES 
+(1, 1, "Bruce Wayne"),
+(1, 2, "Alfred"),
+(1, 3, "Ra's Al Ghul"),
+(1, 4, "Rachel Dawes"), 
+(1, 5, "Commissioner Gordon"),
+(2, 1, "Bruce Wayne"),
+(2, 6, "Joker"),
+(2, 7, "Harvey Dent"),
+(2, 2, "Alfred"),
+(2, 8, "Rachel Dawes"), 
+(3, 1, "Bruce Wayne"), 
+(3, 5, "Commissioner Gordon"),
+(3, 9, "Bane"), 
+(3, 10, "John Blake"),
+(3, 11, "Selina Kyle");
+
+INSERT INTO studios (studio, movie_id)
+VALUES 
+    ("Warner Bros.", 1),
+    ("Warner Bros.", 2),
+    ("Warner Bros.", 3);
 
 
 -- Prints a header for the movies output
@@ -153,9 +217,9 @@ CREATE TABLE studios (
 -- The SQL statement for the movies output
 -- TODO!
 
-SELECT movies.title, movies.year, movings.MPAA, studios.studio
+SELECT movies.title, movies.year, movies.rating, studios.studio
 FROM movies
-INNER JOIN studios on movies.id = studios.movie_id;
+INNER JOIN studios on movies_id = studios.movie_id;
 
 
 -- Prints a header for the cast output
@@ -164,12 +228,11 @@ INNER JOIN studios on movies.id = studios.movie_id;
 .print "========"
 .print ""
 
-
 -- The SQL statement for the cast output
 -- TODO!
 
 SELECT movies.title, actors.name, top_cast.character
 FROM top_cast
-INNER JOIN movies 
-INNER JOIN 
+INNER JOIN movies ON top_cast.movie_id = movie_id
+INNER JOIN actors ON top_cast.actor_id = actor_id;
 
